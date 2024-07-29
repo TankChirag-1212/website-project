@@ -3,20 +3,20 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = 'd784ec34-84a6-4363-8d99-5ac8be4a8df8'
-        REPO_NAME = 'chirag1212/my_repo'
+        REPO_NAME = 'chirag1212/nginx_webapp'
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/TankChirag-1212/my-java-app.git'
+                git 'https://github.com/TankChirag-1212/website-project.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${env.REPO_NAME}:java-app")
+                    dockerImage = docker.build("${env.REPO_NAME}:v1.0")
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
                 script {
                     docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
                         // dockerImage.push("${env.BUILD_NUMBER}")
-                        dockerImage.push('java-app')
+                        dockerImage.push('v1.0')
                     }
                 }
             }
@@ -36,8 +36,8 @@ pipeline {
             steps {
                 script {
                     sh """
-                    docker run -itd --name java-container \
-                    ${env.REPO_NAME}:java-app
+                    docker run -itd --name nginx-webapp-container \
+                    ${env.REPO_NAME}:v1.0
                     """
                 }
             }
