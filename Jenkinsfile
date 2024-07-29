@@ -16,7 +16,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${env.REPO_NAME}:v1.0")
+                    dockerImage = docker.build("${env.REPO_NAME}:v2.0")
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
                 script {
                     docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
                         // dockerImage.push("${env.BUILD_NUMBER}")
-                        dockerImage.push('v1.0')
+                        dockerImage.push('v2.0')
                     }
                 }
             }
@@ -37,7 +37,7 @@ pipeline {
                 script {
                     sh """
                     docker run -itd --name nginx-webapp-container \
-                    ${env.REPO_NAME}:v1.0
+                    ${env.REPO_NAME}:v2.0
                     """
                 }
             }
@@ -49,7 +49,7 @@ pipeline {
             echo 'Build and test succeeded!'
             script{
                 sh """
-                docker rm --force java-container
+                docker rm --force nginx-webapp-container
                 """
             }
         }
