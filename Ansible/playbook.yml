@@ -4,7 +4,7 @@
   vars:
     container_count: 2
     container_name: docker-container
-    container_image: ubuntu
+    container_image: chirag1212/nginx-webapp:v1.0
     container_command: sleep 1
 tasks:
     - name: Install aptitude
@@ -44,7 +44,8 @@ tasks:
     - name: Install Docker Module for Python
       pip:
         name: docker
-    - name: Pull default Docker image
+
+    - name: Pull Docker image
       community.docker.docker_image:
         name: "{{ container_image | default('ubuntu') }}"
         source: pull
