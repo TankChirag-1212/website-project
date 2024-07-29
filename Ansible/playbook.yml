@@ -6,7 +6,7 @@
     container_name: docker-container
     container_image: chirag1212/nginx-webapp:v1.0
     container_command: sleep 1
-tasks:
+  tasks:
     - name: Install aptitude
       apt:
         name: aptitude
