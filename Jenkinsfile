@@ -30,7 +30,6 @@ pipeline {
                     }
                 }
             }
-        }
 
         stage('Deploy Container') {
             steps {
@@ -63,4 +62,5 @@ pipeline {
         failure {
             echo 'Build or test failed!'
         }
+    }
 }
