@@ -28,7 +28,7 @@ pipeline {
                 //         // dockerImage.push("${env.BUILD_NUMBER}")
                 //     //    dockerImage.push('v2.0')
                 //     }
-                // }
+                }
             }
 
         stage('Deploy Container') {
