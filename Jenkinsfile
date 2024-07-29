@@ -35,7 +35,7 @@ pipeline {
         stage('Checking'){
             steps{
                 script{
-                    sh "ansible all -m ping inventory: 'Ansible/inventory'"
+                    sh "ansible all -m ping -i Ansible/inventory"
                 }
             }
         }
