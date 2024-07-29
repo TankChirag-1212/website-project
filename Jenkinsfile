@@ -32,6 +32,13 @@ pipeline {
                 echo 'Deploying contianer success'
             }
         }
+        stage('Checking'){
+            steps{
+                script{
+                    sh "ansible all -m ping inventory: 'Ansible/inventory'"
+                }
+            }
+        }
         stage ('Executing ansible playbook'){
             steps {
                 ansiblePlaybook inventory: 'Ansible/inventory', playbook: 'Ansible/playbook.yml'
