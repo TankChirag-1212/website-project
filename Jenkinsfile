@@ -24,9 +24,9 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
+                    //docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
                         // dockerImage.push("${env.BUILD_NUMBER}")
-                        dockerImage.push('v2.0')
+                    //    dockerImage.push('v2.0')
                     }
                 }
             }
@@ -36,10 +36,16 @@ pipeline {
             steps {
                 script {
                     sh """
-                    docker run -itd --name nginx-webapp-container \
+                    echo "deployed container"
+                    // docker run -itd --name nginx-webapp-container \
                     ${env.REPO_NAME}:v2.0
                     """
                 }
+            }
+        }
+        stage ('Executing ansible playbook'){
+            steps {
+                ansiblePlaybook playbook: 'Ansible/playbook.yml'
             }
         }
     }
@@ -49,7 +55,8 @@ pipeline {
             echo 'Build and test succeeded!'
             script{
                 sh """
-                docker rm --force nginx-webapp-container
+                echo 'build successful'
+                // docker rm --force nginx-webapp-container
                 """
             }
         }
