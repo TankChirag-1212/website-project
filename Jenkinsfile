@@ -23,23 +23,23 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                script {
-                    //docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
-                        // dockerImage.push("${env.BUILD_NUMBER}")
-                    //    dockerImage.push('v2.0')
-                    }
-                }
+                // script {
+                //     //docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
+                //         // dockerImage.push("${env.BUILD_NUMBER}")
+                //     //    dockerImage.push('v2.0')
+                //     }
+                // }
             }
 
         stage('Deploy Container') {
             steps {
-                script {
-                    sh """
-                    echo "deployed container"
-                    // docker run -itd --name nginx-webapp-container \
-                    ${env.REPO_NAME}:v2.0
-                    """
-                }
+                // script {
+                //     sh """
+                    // echo "deployed container"
+                //     // docker run -itd --name nginx-webapp-container \
+                //     ${env.REPO_NAME}:v2.0
+                //     """
+                // }
             }
         }
         stage ('Executing ansible playbook'){
