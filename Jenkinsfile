@@ -34,7 +34,7 @@ pipeline {
         }
         stage ('Executing ansible playbook'){
             steps {
-                ansiblePlaybook playbook: 'Ansible/playbook.yml'
+                ansiblePlaybook inventory: 'Ansible/inventory', playbook: 'Ansible/playbook.yml'
             }
         }
     }
