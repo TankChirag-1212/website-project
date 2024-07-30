@@ -1,3 +1,3 @@
 [target]
-managed1
-managed2
+managed1 ansible_user=vagrant ansible_host=192.168.56.24
+managed2 ansible_user=vagrant ansible_host=192.168.56.25
